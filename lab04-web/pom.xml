@@ -18,9 +18,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>\${project.groupId}</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>lab04-core</artifactId>
-            <version>\${project.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
