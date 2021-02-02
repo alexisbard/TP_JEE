@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import junia.lab04.core.service.CompanyService;
+import junia.lab04.core.entity.Company;
 
 import javax.inject.Inject;
 
@@ -16,7 +17,6 @@ public class CompanyController {
     public String getListOfCompanies(ModelMap modelMap){
         List<Company> companies = companyService.findAllWithProjects();
         modelMap.addAllAttributes("companies",companies);
-        findAllWithProjects
         return "companiesList";
     }
 }
