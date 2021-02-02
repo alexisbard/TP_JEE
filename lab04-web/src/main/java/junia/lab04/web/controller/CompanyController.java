@@ -8,6 +8,7 @@ import junia.lab04.core.service.CompanyService;
 import junia.lab04.core.entity.Company;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Controller
 public class CompanyController {
@@ -16,7 +17,7 @@ public class CompanyController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getListOfCompanies(ModelMap modelMap){
         List<Company> companies = companyService.findAllWithProjects();
-        modelMap.addAllAttributes("companies",companies);
+        modelMap.addAttribute("companies",companies);
         return "companiesList";
     }
 }
