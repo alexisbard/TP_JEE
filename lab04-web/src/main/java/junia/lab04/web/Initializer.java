@@ -1,17 +1,26 @@
 package junia.lab04.web;
 
-public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+import junia.lab04.core.config.AppConfig;
+import junia.lab04.core.config.DBConfig;
+import junia.lab04.web.config.WebConfig;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-    public String[] getRootConfigClasses(){
-        return new String[]{AppConfig,DBConfig};
+
+public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+
+    @Override
+    protected Class<?>[] getRootConfigClasses () {
+        return new Class[]{AppConfig.class,DBConfig.class};
     }
 
-
-    public String[] getServletConfigClasses () {
-        return new String[]{WebConfig};
+    @Override
+    protected Class<?>[] getServletConfigClasses () {
+        return new Class[]{WebConfig.class};
     }
 
-    public String[] getServletMappings () {
+    @Override
+    protected String[] getServletMappings () {
         return new String[]{"/"};
     }
 }
