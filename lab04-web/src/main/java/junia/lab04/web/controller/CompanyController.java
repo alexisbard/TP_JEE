@@ -16,28 +16,36 @@ import java.util.List;
 @Controller
 public class CompanyController {
     @Inject
-    CompanyService companyService ;
+    CompanyService companyService;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String getListOfCompanies(ModelMap modelMap){
+    public String getListOfCompanies(ModelMap modelMap) {
         List<Company> companies = companyService.findAllWithProjects();
-        modelMap.addAttribute("companies",companies);
+        modelMap.addAttribute("companies", companies);
         return "companiesList";
     }
+
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String getForm(ModelMap modelMap){
+    public String getForm(ModelMap modelMap) {
         Company company = new Company();
-        modelMap.put("company",company);
+        modelMap.put("company", company);
         return "companyForm";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String submitForm(@ModelAttribute("company")Company  company){
+    public String submitForm(@ModelAttribute("company") Company company) {
         companyService.save(company);
         return "redirect:list";
     }
+
     @RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
-    public String deleteCompany(@PathVariable("id") long id){
+    public String deleteCompany(@PathVariable("id") long id) {
         companyService.deleteById(id);
         return "redirect:/list";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String loadForm() {
+        return "redirect:form";
     }
 }
