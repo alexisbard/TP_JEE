@@ -45,7 +45,12 @@ public class CompanyController {
         companyService.deleteById(id);
         return "redirect:/list";
     }
-
+    @RequestMapping(value = "{id}/see", method = RequestMethod.GET)
+    public String seeUser(@PathVariable("id") long id,ModelMap modelMap) {
+        long currentUserID = id;
+        modelMap.addAttribute("currentUserID", currentUserID);
+        return "userProfile";
+    }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String loadForm() {
         return "redirect:userform";
@@ -57,7 +62,9 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/userlist", method = RequestMethod.GET)
-    public String loadUserList() {
+    public String loadUserList(ModelMap modelMap) {
+        List<Company> companies = companyService.findAllWithProjects();
+        modelMap.addAttribute("companies", companies);
         return "userList";
     }
 }
