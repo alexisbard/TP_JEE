@@ -8,11 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserDAO extends JpaRepository<User, Long> {
-<<<<<<< HEAD
     @Query("SELECT DISTINCT u FROM User u ")
-=======
-    @Query("SELECT DISTINCT p FROM Product p ")
->>>>>>> b9e6aac012531352e00dc7bcb2712209e712ec85
     List<User> findAllUsers();
 }
 

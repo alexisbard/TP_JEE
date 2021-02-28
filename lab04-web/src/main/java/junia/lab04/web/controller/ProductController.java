@@ -59,7 +59,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/userform", method = RequestMethod.GET)
-    public String loadUserForm() {
+    public String loadUserForm(ModelMap modelMap) {
+        User user = new User();
+        modelMap.put("user", user);
         return "userForm";
     }
 
