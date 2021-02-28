@@ -24,10 +24,10 @@
     <div class="container">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/lab04_web_war_exploded/list">User list</a>
+                <a class="navbar-brand" href="/lab04_web_war_exploded/userlist">User list</a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="/lab04_web_war_exploded/adduserform">Add User</a>
+                <a class="navbar-brand" href="/lab04_web_war_exploded/userform">Add User</a>
             </div>
         </div>
     </div>
