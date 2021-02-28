@@ -37,16 +37,19 @@
     </div>
 
 
-    <table class="table table-striped">
+    <table class="table table-striped table-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Note</th>
+            <th scope="col">Status</th>
+        </tr>
         #foreach($company in $companies)
             <tr>
                 <td>$company.name</td>
-                <td>
-                    #foreach($project in $company.projects)
-                        Course : $project.name :
-                       <br/>
-                    #end
-                </td>
+                <td>$company.articleType</td>
+                <td>$company.note</td>
+                <td>$company.status</td>
                 <td><a href="$company.id/delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
             </tr>
         #end

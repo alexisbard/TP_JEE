@@ -35,6 +35,8 @@ public class CompanyController {
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(@ModelAttribute("company") Company company) {
         companyService.save(company);
+        System.out.println(company.getName());
+        System.out.println(company.getArticleType());
         return "redirect:list";
     }
 
