@@ -27,7 +27,7 @@
                 <a class="navbar-brand" href="/lab04_web_war_exploded/list">User list</a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="/lab04_web_war_exploded/adduserform">Add User</a>
+                <a class="navbar-brand" href="/lab04_web_war_exploded/form">Add User</a>
             </div>
         </div>
     </div>
@@ -36,25 +36,25 @@
 <div class="container">
 
     <div class="jumbotron">
-        <h1>Add an Article and its details</h1>
+        <h1>Add a Product and its details</h1>
     </div>
 
     <form action="form" method="POST">
         <div class="form-group">
-            <label for="name">Article name</label>
-            #springFormInput("company.name" "class='form-control' placeholder='type here'")
+            <label for="name">Product name</label>
+            #springFormInput("product.name" "class='form-control' placeholder='type here'")
         </div>
         <div class="form-group">
-            <label for="articleType">Type of the Article </label>
-            #springFormInput("company.articleType" "class='form-control' placeholder='type here'")
+            <label for="type">Type of the Product </label>
+            #springFormInput("product.type" "class='form-control' placeholder='type here'")
         </div>
         <div class="form-group">
-            <label for="articleType">note</label>
-            #springFormInput("company.note" "class='form-control' placeholder='type here'")
+            <label for="note">note</label>
+            #springFormInput("product.note" "class='form-control' placeholder='type here'")
         </div>
         <div class="form-group">
-            <label for="articleType">status</label>
-            #springFormInput("company.status" "class='form-control' placeholder='type here'")
+            <label for="status">status</label>
+            #springFormInput("product.status" "class='form-control' placeholder='type here'")
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>

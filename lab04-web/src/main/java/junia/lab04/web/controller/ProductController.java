@@ -1,48 +1,47 @@
 package junia.lab04.web.controller;
 
-import jdk.swing.interop.SwingInterOpUtils;
+import junia.lab04.core.entity.Product;
+import junia.lab04.core.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import junia.lab04.core.service.CompanyService;
-import junia.lab04.core.entity.Company;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Controller
-public class CompanyController {
+public class ProductController {
     @Inject
-    CompanyService companyService;
+    ProductService productService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getListOfCompanies(ModelMap modelMap) {
-        List<Company> companies = companyService.findAllWithProjects();
-        modelMap.addAttribute("companies", companies);
-        return "companiesList";
+        List<Product> products = productService.findAllProducts();
+        modelMap.addAttribute("products", products);
+        return "productList";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String getForm(ModelMap modelMap) {
-        Company company = new Company();
-        modelMap.put("company", company);
-        return "companyForm";
+        Product product = new Product();
+        modelMap.put("product", product);
+        return "productForm";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String submitForm(@ModelAttribute("company") Company company) {
-        companyService.save(company);
-        System.out.println(company.getName());
-        System.out.println(company.getArticleType());
+    public String submitForm(@ModelAttribute("product") Product product) {
+        productService.save(product);
+        System.out.println(product.getName());
+        System.out.println(product.getType());
         return "redirect:list";
     }
 
     @RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
     public String deleteCompany(@PathVariable("id") long id) {
-        companyService.deleteById(id);
+        productService.deleteById(id);
         return "redirect:/list";
     }
     @RequestMapping(value = "{id}/see", method = RequestMethod.GET)
@@ -63,8 +62,8 @@ public class CompanyController {
 
     @RequestMapping(value = "/userlist", method = RequestMethod.GET)
     public String loadUserList(ModelMap modelMap) {
-        List<Company> companies = companyService.findAllWithProjects();
-        modelMap.addAttribute("companies", companies);
+        List<Product> products = productService.findAllProducts();
+        modelMap.addAttribute("products", products);
         return "userList";
     }
 }

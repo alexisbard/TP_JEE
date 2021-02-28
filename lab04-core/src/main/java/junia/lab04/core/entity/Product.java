@@ -3,15 +3,15 @@ package junia.lab04.core.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Company extends GenericEntity{
+public class Product extends GenericEntity{
 
 
     private String name;
-    private String articleType;
+    private String type;
     private String note;
     private String status;
 
-    public Company() {
+    public Product() {
     }
 
     public String getNote() { return note; }
@@ -22,9 +22,9 @@ public class Company extends GenericEntity{
 
     public void setStatus(String status) { this.status = status; }
 
-    public String getArticleType() { return articleType; }
+    public String getType() { return type; }
 
-    public void setArticleType(String articleType) { this.articleType = articleType; }
+    public void setType(String articleType) { this.type = articleType; }
 
     public String getName() {
         return name;
