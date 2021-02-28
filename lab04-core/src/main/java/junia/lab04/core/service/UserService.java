@@ -18,8 +18,7 @@ public class UserService {
     }
 
 
-    public void deleteAll() {
-        userDAO.deleteAll();
+    public void deleteAll() {userDAO.deleteAll();
     }
 
 
@@ -28,8 +27,7 @@ public class UserService {
     }
 
 
-    public long countAll() {
-        return userDAO.count();
+    public long countAll() {return userDAO.count();
     }
 }
 

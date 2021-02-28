@@ -1,7 +1,6 @@
 package junia.lab04.core.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class User extends GenericEntity {

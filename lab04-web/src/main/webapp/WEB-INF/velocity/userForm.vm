@@ -42,7 +42,19 @@
     <form action="form" method="POST">
         <div class="form-group">
             <label for="name">User name</label>
-            #springFormInput("company.name" "class='form-control' placeholder='type here'")
+            #springFormInput("user.name" "class='form-control' id='name' placeholder='type here'")
+        </div>
+        <div class="form-group">
+            <label for="forname">User forname</label>
+            #springFormInput("user.forname" "class='form-control' id='forname' placeholder='type here'")
+        </div>
+        <div class="form-group">
+            <label for="age">User age</label>
+            #springFormInput("user.age" "class='form-control' id='age' placeholder='type here'")
+        </div>
+        <div class="form-group">
+            <label for="pseudo">User pseudo</label>
+            #springFormInput("user.pseudo" "class='form-control' id='pseudo' placeholder='type here'")
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
