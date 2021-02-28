@@ -48,6 +48,16 @@ public class CompanyController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String loadForm() {
-        return "redirect:form";
+        return "redirect:userform";
+    }
+
+    @RequestMapping(value = "/userform", method = RequestMethod.GET)
+    public String loadUserForm() {
+        return "userForm";
+    }
+
+    @RequestMapping(value = "/userlist", method = RequestMethod.GET)
+    public String loadUserList() {
+        return "userList";
     }
 }
