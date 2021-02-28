@@ -1,7 +1,9 @@
 package junia.lab04.web.controller;
 
 import junia.lab04.core.entity.Product;
+import junia.lab04.core.entity.User;
 import junia.lab04.core.service.ProductService;
+import junia.lab04.core.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,43 +18,44 @@ import java.util.List;
 public class ProductController {
     @Inject
     ProductService productService;
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @Inject
+    UserService userService;
+    @RequestMapping(value = "/productlist", method = RequestMethod.GET)
     public String getListOfCompanies(ModelMap modelMap) {
         List<Product> products = productService.findAllProducts();
         modelMap.addAttribute("products", products);
         return "productList";
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    @RequestMapping(value = "/productform", method = RequestMethod.GET)
     public String getForm(ModelMap modelMap) {
         Product product = new Product();
         modelMap.put("product", product);
         return "productForm";
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.POST)
+    @RequestMapping(value = "/productform", method = RequestMethod.POST)
     public String submitForm(@ModelAttribute("product") Product product) {
         productService.save(product);
         System.out.println(product.getName());
         System.out.println(product.getType());
-        return "redirect:list";
+        return "redirect:productlist";
     }
 
     @RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
     public String deleteCompany(@PathVariable("id") long id) {
         productService.deleteById(id);
-        return "redirect:/list";
+        return "redirect:/productlist";
     }
     @RequestMapping(value = "{id}/see", method = RequestMethod.GET)
     public String seeUser(@PathVariable("id") long id,ModelMap modelMap) {
         long currentUserID = id;
         modelMap.addAttribute("currentUserID", currentUserID);
-        return "userProfile";
+        return "redirect:/userprofile";
     }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String loadForm() {
-        return "redirect:userform";
+        return "redirect:productform";
     }
 
     @RequestMapping(value = "/userform", method = RequestMethod.GET)
@@ -62,8 +65,15 @@ public class ProductController {
 
     @RequestMapping(value = "/userlist", method = RequestMethod.GET)
     public String loadUserList(ModelMap modelMap) {
-        List<Product> products = productService.findAllProducts();
-        modelMap.addAttribute("products", products);
+        List<User> users = userService.findAllUsers();
+        modelMap.addAttribute("users", users);
         return "userList";
+    }
+
+    @RequestMapping(value = "/userprofile", method = RequestMethod.GET)
+    public String loadUserProfile(ModelMap modelMap) {
+        List<User> users = userService.findAllUsers();
+        modelMap.addAttribute("users", users);
+        return "userprofile";
     }
 }
