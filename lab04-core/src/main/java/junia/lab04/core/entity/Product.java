@@ -10,9 +10,14 @@ public class Product extends GenericEntity{
     private String type;
     private String note;
     private String status;
+    private long ownerID;
 
     public Product() {
     }
+
+    public long getOwnerID() { return ownerID; }
+
+    public void setOwnerID(long ownerID) { this.ownerID = ownerID; }
 
     public String getNote() { return note; }
 

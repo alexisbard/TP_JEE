@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,49 +21,75 @@ public class ProductController {
     ProductService productService;
     @Inject
     UserService userService;
-    @RequestMapping(value = "/productlist", method = RequestMethod.GET)
-    public String getListOfCompanies(ModelMap modelMap) {
-        List<Product> products = productService.findAllProducts();
-        modelMap.addAttribute("products", products);
-        return "productList";
+
+    User currentUser;
+    Product currentProduct;
+
+    //Default page
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String loadForm() {
+        return "redirect:userlist";
     }
 
+
+
+
+
+    // product pages
     @RequestMapping(value = "/productform", method = RequestMethod.GET)
-    public String getForm(ModelMap modelMap) {
+    public String getProductForm(ModelMap modelMap) {
         Product product = new Product();
         modelMap.put("product", product);
         return "productForm";
     }
 
     @RequestMapping(value = "/productform", method = RequestMethod.POST)
-    public String submitForm(@ModelAttribute("product") Product product) {
+    public String submitProductForm(@ModelAttribute("product") Product product) {
+        product.setOwnerID(currentUser.getId());
         productService.save(product);
-        System.out.println(product.getName());
-        System.out.println(product.getType());
-        return "redirect:productlist";
+        return "redirect:userprofile";
     }
 
-    @RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
-    public String deleteCompany(@PathVariable("id") long id) {
+    @RequestMapping(value = "{id}/deleteproduct", method = RequestMethod.GET)
+    public String deleteProduct(@PathVariable("id") long id) {
         productService.deleteById(id);
-        return "redirect:/productlist";
-    }
-    @RequestMapping(value = "{id}/see", method = RequestMethod.GET)
-    public String seeUser(@PathVariable("id") long id,ModelMap modelMap) {
-        long currentUserID = id;
-        modelMap.addAttribute("currentUserID", currentUserID);
         return "redirect:/userprofile";
     }
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loadForm() {
-        return "redirect:productform";
+
+    @RequestMapping(value = "{id}/seeproduct", method = RequestMethod.GET)
+    public String seeProduct(@PathVariable("id") long id) {
+        List<Product> products = productService.findAllProducts();
+        for (Product product : products){
+            if (id == product.getId()){
+                currentProduct = product;
+                return "redirect:/productprofile";
+            }
+        }
+        return "redirect:/userprofile";
     }
 
+    @RequestMapping(value = "/productprofile", method = RequestMethod.GET)
+    public String loadProductProfile(ModelMap modelMap) {
+        modelMap.addAttribute("currentProduct", currentProduct);
+        return "productProfile";
+    }
+
+
+
+
+
+    //user pages
     @RequestMapping(value = "/userform", method = RequestMethod.GET)
     public String loadUserForm(ModelMap modelMap) {
         User user = new User();
         modelMap.put("user", user);
         return "userForm";
+    }
+
+    @RequestMapping(value = "/userform", method = RequestMethod.POST)
+    public String submitUserForm(@ModelAttribute("user") User user) {
+        userService.save(user);
+        return "redirect:userlist";
     }
 
     @RequestMapping(value = "/userlist", method = RequestMethod.GET)
@@ -72,10 +99,35 @@ public class ProductController {
         return "userList";
     }
 
+    @RequestMapping(value = "{id}/seeuser", method = RequestMethod.GET)
+    public String seeUser(@PathVariable("id") long id) {
+        List<User> users = userService.findAllUsers();
+        for (User user : users){
+            if (id == user.getId()){
+                currentUser = user;
+                return "redirect:/userprofile";
+            }
+        }
+        return "redirect:/userlist";
+    }
+
     @RequestMapping(value = "/userprofile", method = RequestMethod.GET)
     public String loadUserProfile(ModelMap modelMap) {
-        List<User> users = userService.findAllUsers();
-        modelMap.addAttribute("users", users);
+        List<Product> products = productService.findAllProducts();
+        List<Product> currentUserProducts = new ArrayList<>();
+        for (Product product : products){
+            if (product.getOwnerID() == currentUser.getId()){
+                currentUserProducts.add(product);
+            }
+        }
+        modelMap.addAttribute("currentUserProducts", currentUserProducts);
+        modelMap.addAttribute("currentUser", currentUser);
         return "userprofile";
+    }
+
+    @RequestMapping(value = "{id}/deleteuser", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.deleteById(id);
+        return "redirect:/userlist";
     }
 }

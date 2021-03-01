@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ProductDAO extends JpaRepository<Product, Long> {
 
-    @Query("SELECT DISTINCT p FROM Product p ")
+    @Query("SELECT p FROM Product p ")
     List<Product> findAllProducts();
 }

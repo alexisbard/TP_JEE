@@ -36,9 +36,29 @@
 <div class="container">
 
     <div class="jumbotron">
-        <h1>User Infos : $currentUserID</h1>
+        <h1>User : $currentUser.pseudo</h1>
+    </div>
+    <div>
+        <p>Name : $currentUser.name</p>
+        <p>Surname : $currentUser.surname</p>
+        <p>Age : $currentUser.age</p>
     </div>
 
+</div>
+<div class="container">
+
+    <div class="jumbotron">
+        <h3>List of products <a href="productform" class="btn btn-primary"><span class="glyphicon glyphicon glyphicon-plus"></span></a></h3>
+    </div>
+    <table class="table table-striped table-dark">
+        #foreach($product in $currentUserProducts)
+            <tr>
+                <td>$product.name</td>
+                <td><a href="$product.id/deleteproduct" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+                <td><a href="$product.id/seeproduct" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+            </tr>
+        #end
+    </table>
 </div>
 
 

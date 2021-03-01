@@ -6,21 +6,12 @@ import javax.persistence.Entity;
 public class User extends GenericEntity {
 
     private String name;
-    private String forname;
+    private String surname;
     private int age;
     private String pseudo;
 
-
     public User() {
     }
-
-    public User(String name, String forname, int age, String pseudo) {
-        this.name = name;
-        this.forname = forname;
-        this.age = age;
-        this.pseudo = pseudo;
-    }
-
 
     public String getName() {
         return name;
@@ -32,12 +23,12 @@ public class User extends GenericEntity {
     }
 
 
-    public String getForname() {
-        return forname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setForname(String forname) {
-        this.forname = forname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public int getAge() {

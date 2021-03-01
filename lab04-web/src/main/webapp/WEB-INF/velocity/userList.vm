@@ -44,11 +44,11 @@
         <tr>
             <th scope="col">User nz</th>
         </tr>
-        #foreach($company in $companies)
+        #foreach($user in $users)
             <tr>
-                <td>$company.name</td>
-                <td><a href="$company.id/delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
-                <td><a href="$company.id/see" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                <td>$user.name</td>
+                <td><a href="$user.id/deleteuser" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+                <td><a href="$user.id/seeuser" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a></td>
             </tr>
         #end
     </table>
